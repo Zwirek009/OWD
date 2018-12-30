@@ -12,6 +12,8 @@ param udzialy {MEDIA, SEGMENTY};		# udzialy poszczegolnych segmentow rynku w ogo
 var ReklamaStd {m in MEDIA} >= 0, integer;	# liczba kupionych jednostek reklamy standardowej skutecznosci 
 var ReklamaNis {m in MEDIA} >= 0, integer;	# liczba kupionych jednostek reklamy niskiej skutecznosci
 
+var Odbiorcy {s in SEGMENTY} >=0, integer;	# liczba odbiorcow [tys.]
+
 # funkcja celu
 minimize koszt: sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
 
