@@ -9,8 +9,11 @@ param cenaReklamy {MEDIA};				# cena jednostki reklamowej w danych mediach [tys.
 param udzialy {MEDIA, SEGMENTY};		# udzialy poszczegolnych segmentow rynku w ogolnej liczbie odbiorcow
 
 # zmienne decyzyjne
+var ReklamaStd {m in MEDIA} >= 0, integer;	# liczba kupionych jednostek reklamy standardowej skutecznosci 
+var ReklamaNis {m in MEDIA} >= 0, integer;	# liczba kupionych jednostek reklamy niskiej skutecznosci
 
 # funkcja celu
+minimize koszt: sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
 
 # ograniczenia
 
