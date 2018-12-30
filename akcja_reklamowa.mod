@@ -21,6 +21,7 @@ minimize koszt: sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
 # ograniczenia
 subject to ogr1 {s in SEGMENTY}: Odbiorcy[s] >= minOdbiorcow[s];
 subject to ogr2 {s in SEGMENTY}: Odbiorcy[s] <= sum{m in MEDIA} udzialy[m,s]/100*(skutecznosc[m]*ReklamaStd[m]+skutecznosc[m]*wartoscNiskiejSkutecznosci*ReklamaNis[m]);
+subject to ogr3 {m in MEDIA}: skutecznosc[m]*ReklamaStd[m] <= progSkutecznosci;
 
 # przelaczenie na solver calkowitoliczbowy
 option solver cplex;
