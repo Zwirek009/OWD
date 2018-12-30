@@ -5,12 +5,11 @@ param progSkutecznosci := 200;
 param wartoscNiskiejSkutecznosci := 0.5;
 param minOdbiorcowOgolem := 1000;
 
-param minOdbiorcowSegmentu :=
-								S1	200
-								S2	600
-								S3	200
-								S4	400
-								S5	150 ;
+param minOdbiorcow :=
+						S1	200
+						S2	600
+						S3	400
+						S4	150 ;
 
 param cenaReklamy :=
 					M1 5
