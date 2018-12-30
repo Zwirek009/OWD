@@ -1,0 +1,28 @@
+set SEGMENTY := S1 S2 S3 S4;
+set MEDIA := M1 M2 M3 M4 M5;
+
+param progSkutecznosci := 200;
+param wartoscNiskiejSkutecznosci := 0.5;
+param minOdbiorcowOgolem := 1000;
+
+param minOdbiorcowSegmentu :=
+								S1	200
+								S2	600
+								S3	200
+								S4	400
+								S5	150 ;
+
+param cenaReklamy :=
+					M1 5
+					M2 3
+					M3 50
+					M4 10
+					M5 1 ;
+
+param udzialy :
+					S1	S2	S3	S4	:=
+				M1	30	40	30	10
+				M2	5	80	20	1
+				M3	25	40	30	5
+				M4	20	30	20	5	
+				M5	80	10	20	60
