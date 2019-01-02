@@ -32,3 +32,5 @@ param udzialy :
 				M3	25	40	30	5
 				M4	20	30	20	5	
 				M5	80	10	20	60 ;
+				
+param minKosztCelu := 1134;

@@ -1,13 +1,15 @@
 ### parametry ###
-set SEGMENTY;							# segmenty rynku
-set MEDIA;								# media reklamowe
-param progSkutecznosci;					# liczba odbiorcow (w tys.), po przekroczeniu ktorej spada skutecznosc
-param wartoscNiskiejSkutecznosci;		# czesc skutecznosci po przekroczeniu progu
-param minOdbiorcowOgolem;				# minimalna liczba odbiorcow ogolem [tys.]
-param minOdbiorcow {SEGMENTY};			# minimalna liczba odbiorcow w danych segmentach [tys.]
-param skutecznosc {MEDIA};				# skutecznosc reklamy mierzona liczba odbiorcow ogolem [tys.]
-param cenaReklamy {MEDIA};				# cena jednostki reklamowej w danych mediach [tys. zl]
-param udzialy {MEDIA, SEGMENTY};		# udzialy poszczegolnych segmentow rynku w ogolnej liczbie odbiorcow
+set SEGMENTY;						# segmenty rynku
+set MEDIA;							# media reklamowe
+param progSkutecznosci;				# liczba odbiorcow (w tys.), po przekroczeniu ktorej spada skutecznosc
+param wartoscNiskiejSkutecznosci;	# czesc skutecznosci po przekroczeniu progu
+param minOdbiorcowOgolem;			# minimalna liczba odbiorcow ogolem [tys.]
+param minOdbiorcow {SEGMENTY};		# minimalna liczba odbiorcow w danych segmentach [tys.]
+param skutecznosc {MEDIA};			# skutecznosc reklamy mierzona liczba odbiorcow ogolem [tys.]
+param cenaReklamy {MEDIA};			# cena jednostki reklamowej w danych mediach [tys. zl]
+param udzialy {MEDIA, SEGMENTY};	# udzialy poszczegolnych segmentow rynku w ogolnej liczbie odbiorcow
+
+param minKosztCelu;					# obliczony minimalny koszt spelnienia wszystkich ograniczen zadania [tys. zl]
 
 ### zmienne pomocnicze ###
 var ReklamaStd {m in MEDIA} >= 0, integer;	# liczba kupionych jednostek reklamy standardowej skutecznosci 
@@ -28,6 +30,9 @@ var NiedoborOdbiorcowOgolem = (minOdbiorcowOgolem - OdbiorcyOgolem)/(minOdbiorco
 
 # calkowity koszt akcji reklamowej [tys.]
 var Koszt = sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
+
+# niedobor (???) wzgledem minimalnego kosztu spelniajacego ograniczenia zadania [%]
+var NiedoborKosztu = (minKosztCelu - Koszt)/(minKosztCelu/100);
 
 ### funkcje celu ###
 minimize koszt: Koszt;
