@@ -17,8 +17,11 @@ var ReklamaNis {m in MEDIA} >= 0, integer;	# liczba kupionych jednostek reklamy 
 # liczba odbiorcow [tys.]
 var Odbiorcy {s in SEGMENTY} = sum{m in MEDIA} udzialy[m,s]/100*(skutecznosc[m]*ReklamaStd[m]+skutecznosc[m]*wartoscNiskiejSkutecznosci*ReklamaNis[m]);
 
+# calkowity koszt akcji reklamowej [tys.]
+var Koszt = sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
+
 ### funkcje celu ###
-minimize koszt: sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
+minimize koszt: Koszt;
 
 ### ograniczenia ###
 subject to ogr1 {s in SEGMENTY}: Odbiorcy[s] >= minOdbiorcow[s];
