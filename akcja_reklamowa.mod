@@ -14,17 +14,24 @@ var ReklamaStd {m in MEDIA} >= 0, integer;	# liczba kupionych jednostek reklamy 
 var ReklamaNis {m in MEDIA} >= 0, integer;	# liczba kupionych jednostek reklamy niskiej skutecznosci
 
 ### zmienne decyzyjne ###
-# liczba odbiorcow [tys.]
+# liczba odbiorcow w segmentach [tys.]
 var Odbiorcy {s in SEGMENTY} = sum{m in MEDIA} udzialy[m,s]/100*(skutecznosc[m]*ReklamaStd[m]+skutecznosc[m]*wartoscNiskiejSkutecznosci*ReklamaNis[m]);
+
+# niedobor odbiorcow w segmentach wzgledem wartosci minimalnych [%]
+var NiedoborOdbiorcow {s in SEGMENTY} = (minOdbiorcow[s] - Odbiorcy[s])/(minOdbiorcow[s]/100);
 
 # liczba odbiorcow ogolem [tys.]
 var OdbiorcyOgolem = sum {m in MEDIA} (skutecznosc[m]*ReklamaStd[m]+skutecznosc[m]*wartoscNiskiejSkutecznosci*ReklamaNis[m]);
+
+# niedobor odbiorcow ogolem wzgledem wartosci minimalnej [%]
+var NiedoborOdbiorcowOgolem = (minOdbiorcowOgolem - OdbiorcyOgolem)/(minOdbiorcowOgolem/100);
 
 # calkowity koszt akcji reklamowej [tys.]
 var Koszt = sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
 
 ### funkcje celu ###
 minimize koszt: Koszt;
+
 
 ### ograniczenia ###
 subject to ogr1 {s in SEGMENTY}: Odbiorcy[s] >= minOdbiorcow[s];
