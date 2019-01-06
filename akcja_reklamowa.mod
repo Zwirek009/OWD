@@ -17,14 +17,14 @@ var ReklamaNis {m in MEDIA} >= 0, integer;	# liczba kupionych jednostek reklamy 
 # liczba odbiorcow w segmentach [tys.]
 var Odbiorcy {s in SEGMENTY} = sum{m in MEDIA} udzialy[m,s]/100*(skutecznosc[m]*ReklamaStd[m]+skutecznosc[m]*wartoscNiskiejSkutecznosci*ReklamaNis[m]);
 
-# niedobor odbiorcow w segmentach wzgledem wartosci minimalnych [%]
-var NiedoborOdbiorcow {s in SEGMENTY} = (Odbiorcy[s] - minOdbiorcow[s])/(minOdbiorcow[s]/100);
+# nadmiar odbiorcow w segmentach wzgledem wartosci minimalnych [%]
+var NadmiarOdbiorcow {s in SEGMENTY} = (Odbiorcy[s] - minOdbiorcow[s])/(minOdbiorcow[s]/100);
 
 # liczba odbiorcow ogolem [tys.]
 var OdbiorcyOgolem = sum {m in MEDIA} (skutecznosc[m]*ReklamaStd[m]+skutecznosc[m]*wartoscNiskiejSkutecznosci*ReklamaNis[m]);
 
-# niedobor odbiorcow ogolem wzgledem wartosci minimalnej [%]
-var NiedoborOdbiorcowOgolem = (OdbiorcyOgolem - minOdbiorcowOgolem)/(minOdbiorcowOgolem/100);
+# nadmiar odbiorcow ogolem wzgledem wartosci minimalnej [%]
+var NadmiarOdbiorcowOgolem = (OdbiorcyOgolem - minOdbiorcowOgolem)/(minOdbiorcowOgolem/100);
 
 # calkowity koszt akcji reklamowej [tys.]
 var Koszt = sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
@@ -46,5 +46,5 @@ subject to ogr3 {m in MEDIA}: skutecznosc[m]*ReklamaStd[m] <= progSkutecznosci;
 option solver cplex;		# przelaczenie na solver calkowitoliczbowy
 data akcja_reklamowa.dat;
 solve;
-display ReklamaStd, ReklamaNis, Odbiorcy, NiedoborOdbiorcow, OdbiorcyOgolem, NiedoborOdbiorcowOgolem, koszt;
+display ReklamaStd, ReklamaNis, Odbiorcy, NadmiarOdbiorcow, OdbiorcyOgolem, NadmiarOdbiorcowOgolem, koszt;
 
