@@ -40,7 +40,7 @@ var Koszt = sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
 var NadmiarKosztu = (minKosztCelu - Koszt)/(minKosztCelu/100);
 
 ### funkcja celu - metoda wazenia ocen ###
-maximize f_celu: (waga_odbiorcow_ogol*NadmiarOdbiorcowOgolem) + (sum {s in SEGMENTY} (waga_odbiorcow_segm[s]*NadmiarOdbiorcow[s])) + (waga_kosztu*NadmiarKosztu);
+maximize f_celu: (waga_odbiorcow_ogol*NadmiarOdbiorcowOgolem) + (sum {s in SEGMENTY} (waga_odbiorcow_segm[s]*NadmiarOdbiorcow[s])) + (waga_kosztu*(-1)*Koszt);
 
 ### ograniczenia ###
 # ogolna liczba odbiorcow co najmniej rowna wartosciom celu akcji
