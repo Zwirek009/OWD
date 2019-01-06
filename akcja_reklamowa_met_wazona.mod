@@ -9,6 +9,8 @@ param skutecznosc {MEDIA};			# skutecznosc reklamy mierzona liczba odbiorcow ogo
 param cenaReklamy {MEDIA};			# cena jednostki reklamowej w danych mediach [tys. zl]
 param udzialy {MEDIA, SEGMENTY};	# udzialy poszczegolnych segmentow rynku w ogolnej liczbie odbiorcow
 
+param minKosztCelu;
+
 ### metoda wazenia ocen - wagi ocen ###
 param waga_odbiorcow_ogol;
 param waga_odbiorcow_segm {SEGMENTY};
@@ -34,8 +36,11 @@ var NadmiarOdbiorcowOgolem = (OdbiorcyOgolem - minOdbiorcowOgolem)/(minOdbiorcow
 # calkowity koszt akcji reklamowej [tys.]
 var Koszt = sum {m in MEDIA} cenaReklamy[m]*(ReklamaStd[m]+ReklamaNis[m]);
 
+# nadmiar wzgledem minimalnego kosztu spelniajacego ograniczenia zadania [%]
+var NadmiarKosztu = (minKosztCelu - Koszt)/(minKosztCelu/100);
+
 ### funkcja celu - metoda wazenia ocen ###
-maximize f_celu: waga_odbiorcow_ogol*NadmiarOdbiorcowOgolem + sum {s in SEGMENTY} (waga_odbiorcow_segm[s]*NadmiarOdbiorcow[s]) + waga_kosztu*(-1)*Koszt;
+maximize f_celu: (waga_odbiorcow_ogol*NadmiarOdbiorcowOgolem) + (sum {s in SEGMENTY} (waga_odbiorcow_segm[s]*NadmiarOdbiorcow[s])) + (waga_kosztu*NadmiarKosztu);
 
 ### ograniczenia ###
 # ogolna liczba odbiorcow co najmniej rowna wartosciom celu akcji
@@ -47,9 +52,14 @@ subject to ogr2 {s in SEGMENTY}: Odbiorcy[s] >= minOdbiorcow[s];
 # ograniczenie liczby odbiorcow o pelnej skutecznosci odbioru danego medium 
 subject to ogr3 {m in MEDIA}: skutecznosc[m]*ReklamaStd[m] <= progSkutecznosci;
 
+# wartosci zmiennych decyzyjnych wieksze od 0
+subject to ogr4 {s in SEGMENTY}: Odbiorcy[s] >= 0;
+subject to ogr5: OdbiorcyOgolem >= 0;
+subject to ogr6: Koszt >= 0;
+
 ### rozwi¹zanie modelu w oparciu o podane dane i prezentacja wynikow ###
-option solver cplex;		# przelaczenie na solver calkowitoliczbowy
+option solver minos;		# przelaczenie na solver calkowitoliczbowy
 data akcja_reklamowa_met_wazona.dat;
 solve;
-display ReklamaStd, ReklamaNis, Odbiorcy, NadmiarOdbiorcow, OdbiorcyOgolem, NadmiarOdbiorcowOgolem, Koszt, f_celu;
+display ReklamaStd, ReklamaNis, Odbiorcy, NadmiarOdbiorcow, OdbiorcyOgolem, NadmiarOdbiorcowOgolem, Koszt, NadmiarKosztu, f_celu;
 

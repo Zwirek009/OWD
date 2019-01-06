@@ -33,10 +33,12 @@ param udzialy :
 				M4	20	30	20	5	
 				M5	80	10	20	60 ;
 				
-param waga_odbiorcow_ogol := 0;
+param minKosztCelu := 1134;
+
+param waga_odbiorcow_ogol := 1;
 param waga_odbiorcow_segm :=
-							S1	0
-							S2	0
-							S3	0
-							S4	0 ;
-param waga_kosztu := 1;
+							S1	1
+							S2	1
+							S3	500
+							S4	1 ;
+param waga_kosztu := 100;
