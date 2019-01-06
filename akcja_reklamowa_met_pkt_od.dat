@@ -1,0 +1,59 @@
+set SEGMENTY := S1 S2 S3 S4;
+set MEDIA := M1 M2 M3 M4 M5;
+
+param progSkutecznosci := 200;
+param wartoscNiskiejSkutecznosci := 0.5;
+param minOdbiorcowOgolem := 1000;
+
+param minOdbiorcow :=
+						S1	200
+						S2	600
+						S3	400
+						S4	150 ;
+						
+param skutecznosc :=
+					M1	10
+					M2	9
+					M3	50
+					M4	15
+					M5	2 ;
+
+param cenaReklamy :=
+					M1	5
+					M2	3
+					M3	50
+					M4	10
+					M5	1 ;
+
+param udzialy :
+					S1	S2	S3	S4	:=
+				M1	30	40	30	10
+				M2	5	80	20	1
+				M3	25	40	30	5
+				M4	20	30	20	5	
+				M5	80	10	20	60 ;
+				
+param minKosztCelu := 1134;
+
+### na potrzeby przedzia³owej metody punktu odniesienia ###
+param epsilon := 0.05;
+param gamma := 100;
+param beta := 0.01;
+
+### poziomy odniesienia (punkty aspiracji i rezerwacji) ###
+param aspiracjaOdbOgol := 100;
+param aspiracjaOdbSgm :=
+						S1	100
+						S2	100
+						S3	100
+						S4	100 ;
+param aspiracjaKoszt := 0;
+
+param rezerwacjaOdbOgol := 0;
+param rezerwacjaOdbSgm :=
+						S1	0
+						S2	0
+						S3	0
+						S4	0 ;
+param rezerwacjaKoszt := 1134;
+
