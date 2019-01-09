@@ -1,8 +1,8 @@
 set SEGMENTY := S1 S2 S3 S4;
 set MEDIA := M1 M2 M3 M4 M5;
 
-param progSkutecznosci := 200;
-param wartoscNiskiejSkutecznosci := 0.5;
+param progSkut := 200;
+param niskaSkut := 0.5;
 param minOdbiorcowOgolem := 1000;
 
 param minOdbiorcow :=
@@ -11,7 +11,7 @@ param minOdbiorcow :=
 						S3	400
 						S4	150 ;
 						
-param skutecznosc :=
+param skut :=
 					M1	10
 					M2	9
 					M3	50
@@ -32,28 +32,26 @@ param udzialy :
 				M3	25	40	30	5
 				M4	20	30	20	5	
 				M5	80	10	20	60 ;
-				
-param minKosztCelu := 1134;
 
-### na potrzeby przedzia³owej metody punktu odniesienia ###
-param epsilon := 0.05;
-param gamma := 100;
-param beta := 0.01;
+### na potrzeby przedzialowej metody punktu odniesienia ###
+param epsilon := 0.000016;
+param gamma := 1000;
+param beta := 0.001;
 
-### poziomy odniesienia (punkty aspiracji i rezerwacji) ###
-param aspiracjaOdbOgol := 100;
-param aspiracjaOdbSgm :=
+# poziomy odniesienia (punkty aspiracji i rezerwacji) #
+param aspOdbOgol := 100;
+param aspOdbSgm :=
 						S1	100
 						S2	100
-						S3	100
+						S3  100
 						S4	100 ;
-param aspiracjaKoszt := 0;
+param aspKoszt := 500;
 
-param rezerwacjaOdbOgol := 0;
-param rezerwacjaOdbSgm :=
+param rezerwOdbOgol := 0;
+param rezerwOdbSgm :=
 						S1	0
 						S2	0
 						S3	0
 						S4	0 ;
-param rezerwacjaKoszt := 1134;
+param rezerwKoszt := 1134;
 

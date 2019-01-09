@@ -1,8 +1,8 @@
 set SEGMENTY := S1 S2 S3 S4;
 set MEDIA := M1 M2 M3 M4 M5;
 
-param progSkutecznosci := 200;
-param wartoscNiskiejSkutecznosci := 0.5;
+param progSkut := 200;
+param niskaSkut := 0.5;
 param minOdbiorcowOgolem := 1000;
 
 param minOdbiorcow :=
@@ -11,7 +11,7 @@ param minOdbiorcow :=
 						S3	400
 						S4	150 ;
 						
-param skutecznosc :=
+param skut :=
 					M1	10
 					M2	9
 					M3	50
